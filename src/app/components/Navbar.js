@@ -8,7 +8,7 @@ export default function Navbar() {
   const [isMoreOpen, setIsMoreOpen] = useState(false);
 
   return (
-    <nav className="bg-[#47fc2b] shadow-md">
+    <nav className="bg-[#47fc2b] shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center py-4">
           {/* Desktop Nav and Logo */}
