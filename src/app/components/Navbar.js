@@ -1,90 +1,115 @@
 "use client";
-
-import Link from 'next/link';
-import { useState } from 'react';
+import Link from "next/link";
+import { useState } from "react";
+import { FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import useCartStore from "../../store/cart";
+import useAuthStore from "../../store/auth";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const cart = useCartStore((state) => state.cart);
+  const { isLoggedIn, user, logout } = useAuthStore();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    setIsOpen(false);
+    router.push("/");
+  };
 
   return (
-    <nav className="bg-[#47fc2b] shadow-md sticky top-0 z-50">
+    <nav className="bg-dark shadow-lg sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex items-center py-4">
-          {/* Desktop Nav and Logo */}
-          <div className="hidden md:flex justify-between items-center w-full">
-            {/* Logo */}
-            <a href="/">
+        <div className="flex justify-between items-center py-4">
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center">
               <img
-                src="img/Little Pizza Logo.webp" // Update this path to your actual logo image file
+                src="/img/Little Pizza Logo.webp"
                 alt="Little Pizza Logo"
-                className=" h-8 md:h-10 w-auto" // Adjust sizing as needed
+                className="h-10 w-auto"
               />
-            </a>
-            {/* Desktop Links */}
-            <div className="flex items-center space-x-8">
-              <a href="#" className="text-gray-600 hover:text-gray-800">Home</a>
-              <a href="#" className="text-gray-600 hover:text-gray-800">Menu</a>
-              <a href="#" className="text-gray-600 hover:text-gray-800">About Us</a>
-              <div className="relative">
-                <button onClick={() => setIsMoreOpen(!isMoreOpen)} className="text-gray-600 hover:text-gray-800 flex items-center">
-                  More
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
-                {isMoreOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gallery</a>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gift Cards</a>
-                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Contact & Hours</a>
-                  </div>
-                )}
-              </div>
-            </div>
-            {/* Desktop Buttons */}
-            <div className="flex items-center space-x-4">
-              <button className="bg-black text-white px-6 py-2 rounded-full font-semibold">Order Online</button>
-              <a href="#" className="text-gray-600 hover:text-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </a>
-              <a href="#" className="text-gray-600 hover:text-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </a>
-            </div>
+            </Link>
           </div>
 
-          {/* Mobile Header (Logo + Buttons) */}
-          <div className="md:hidden flex justify-between items-center w-full">
-            {/* Logo for Mobile */}
-            <a href="/">
-              <img
-                src="img/Little Pizza Logo.webp"
-                alt="Little Pizza Logo"
-                className=" h-8 w-auto" // Adjust sizing as needed, removed md:h-10 as this is mobile only
-              />
-            </a>
-            {/* Mobile Menu Button, Order, Search, Cart */}
-            <button className="bg-black text-white px-4 py-2 rounded-full font-semibold">Order Now</button>
-            <Link href="#" className="text-gray-600 hover:text-gray-800">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+          <div className="hidden md:flex items-center space-x-8">
+            <Link
+              href="/"
+              className="text-gray-300 hover:text-primary font-semibold"
+            >
+              Home
             </Link>
-            <Link href="#" className="text-gray-600 hover:text-gray-800">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
+            <Link
+              href="/menu"
+              className="text-gray-300 hover:text-primary font-semibold"
+            >
+              Menu
             </Link>
-            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-800">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 6H20" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M4 12H20" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M4 18H20" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+            <Link
+              href="/about"
+              className="text-gray-300 hover:text-primary font-semibold"
+            >
+              About Us
+            </Link>
+            <Link
+              href="/contact"
+              className="text-gray-300 hover:text-primary font-semibold"
+            >
+              Contact
+            </Link>
+          </div>
+
+          <div className="hidden md:flex items-center space-x-4">
+            <Link
+              href="/cart"
+              className="relative text-gray-300 hover:text-primary"
+            >
+              <FaShoppingCart className="h-6 w-6" />
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {cart.length}
+              </span>
+            </Link>
+            {isLoggedIn ? (
+              <>
+                <Link href="/profile" className="text-gray-300 hover:text-primary font-semibold flex items-center">
+                  <FaUserCircle className="h-6 w-6 mr-2" /> {user.name}
+                </Link>
+                <button onClick={handleLogout} className="text-gray-300 hover:text-primary font-semibold">Logout</button>
+              </>
+            ) : (
+              <Link href="/login" className="text-gray-300 hover:text-primary">
+                <FaUserCircle className="h-6 w-6" />
+              </Link>
+            )}
+          </div>
+
+          <div className="md:hidden flex items-center">
+             <Link
+              href="/cart"
+              className="relative text-gray-300 hover:text-primary mr-4"
+            >
+              <FaShoppingCart className="h-6 w-6" />
+              <span className="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {cart.length}
+              </span>
+            </Link>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-white focus:outline-none"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
               </svg>
             </button>
           </div>
@@ -92,15 +117,53 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Nav */}
-      <div className={`md:hidden ${isOpen ? 'block' : 'hidden'}`}>
-        <a href="#" className="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Home</a>
-        <a href="#" className="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Menu</a>
-        <a href="#" className="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">About Us</a>
-        <a href="#" className="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Gallery</a>
-        <a href="#" className="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Gift Cards</a>
-        <a href="#" className="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Contact & Hours</a>
-        <div className="px-4 py-2">
-          <button className="bg-black text-white w-full px-4 py-2 rounded-full font-semibold">Order Online</button>
+      <div className={`md:hidden ${isOpen ? "block" : "hidden"} bg-dark`}>
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <Link
+            href="/"
+            className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
+          >
+            Home
+          </Link>
+          <Link
+            href="/menu"
+            className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
+          >
+            Menu
+          </Link>
+          <Link
+            href="/about"
+            className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
+          >
+            About Us
+          </Link>
+          <Link
+            href="/contact"
+            className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
+          >
+            Contact
+          </Link>
+        </div>
+        <div className="border-t border-gray-700 px-5 py-3">
+           {isLoggedIn ? (
+              <div className="flex flex-col space-y-3">
+                <Link
+                  href="/profile"
+                  className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
+                >
+                   <FaUserCircle className="h-6 w-6 mr-2" />
+                  {user.name}'s Profile
+                </Link>
+                 <button onClick={handleLogout} className="w-full text-left flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Logout</button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="flex items-center justify-center w-full bg-primary text-white rounded-md py-2 text-base font-medium"
+              >
+                Login / Register
+              </Link>
+            )}
         </div>
       </div>
     </nav>
