@@ -66,7 +66,7 @@ export default function Hero() {
     // The Hero needs to take up space (e.g., 90% of viewport height)
     // The `pt-[64px]` you had on the menu component might need adjustment
     // depending on the actual height of your navbar.
-    <section className="relative w-full overflow-hidden h-[90vh]">
+    <section className="relative w-full overflow-hidden h-screen">
       {slides.map((slide, index) => (
         <div
           key={index}
