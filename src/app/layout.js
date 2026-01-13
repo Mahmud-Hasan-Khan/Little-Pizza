@@ -26,9 +26,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        {children}
-        <SpeedInsights/>
+        <main className="flex grow">{children}</main>
         <Footer />
+        <SpeedInsights/>
       </body>
     </html>
   );

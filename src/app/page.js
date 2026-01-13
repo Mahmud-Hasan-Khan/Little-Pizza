@@ -3,9 +3,9 @@ import Menu from "./components/home/Menu";
 
 export default function Home() {
   return (
-    <div className="relative h-screen">
+    <div className="relative">
       <Hero />
-      <Menu className="pt-[64px]" />
+      <Menu />
     </div>
   );
 }
