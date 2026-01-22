@@ -37,49 +37,47 @@ export default function Menu() {
   const addToCart = useCartStore((state) => state.addToCart);
 
   return (
-    <div className="py-20 px-4 bg-gray-100">
-      <div className="container mx-auto">
-        <div className="text-center">
-          <h2 className="text-4xl font-bold">Our Menu</h2>
-          <p className="mt-4 text-lg text-gray-600">
-            Made with the freshest ingredients and dough made daily.
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-          {menuItems.map((item) => (
-            <div
-              key={item.name}
-              className="bg-white rounded-lg shadow-lg overflow-hidden"
-            >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold">{item.name}</h3>
-                <p className="mt-2 text-gray-600">{item.description}</p>
-                <div className="flex justify-between items-center mt-4">
-                  <span className="text-lg font-bold">${item.price}</span>
-                  <button
-                    onClick={() => addToCart(item)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-full font-semibold hover:bg-red-600 transition duration-300"
-                  >
-                    Add to Cart
-                  </button>
-                </div>
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-gray-100">
+      <div className="text-center">
+        <h2 className="text-4xl font-bold">Our Menu</h2>
+        <p className="mt-4 text-lg text-gray-600">
+          Made with the freshest ingredients and dough made daily.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+        {menuItems.map((item) => (
+          <div
+            key={item.name}
+            className="bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-full h-64 object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-xl font-bold">{item.name}</h3>
+              <p className="mt-2 text-gray-600">{item.description}</p>
+              <div className="flex justify-between items-center mt-4">
+                <span className="text-lg font-bold">${item.price}</span>
+                <button
+                  onClick={() => addToCart(item)}
+                  className="bg-red-500 text-white px-4 py-2 rounded-full font-semibold hover:bg-red-600 transition duration-300"
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <Link
-            href="/menu"
-            className="bg-red-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-red-600 transition duration-300"
-          >
-            View Full Menu
-          </Link>
-        </div>
+          </div>
+        ))}
+      </div>
+      <div className="text-center mt-12">
+        <Link
+          href="/menu"
+          className="bg-red-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-red-600 transition duration-300"
+        >
+          View Full Menu
+        </Link>
       </div>
     </div>
   );

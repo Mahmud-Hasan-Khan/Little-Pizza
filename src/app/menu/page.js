@@ -82,7 +82,7 @@ export default function MenuPage() {
 
   return (
     <div className="py-20 px-4 bg-gray-100">
-      <div className="container mx-auto">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold">Our Menu</h2>
           <p className="mt-4 text-lg text-gray-600">
@@ -114,9 +114,9 @@ export default function MenuPage() {
                 alt={item.name}
                 className="w-full h-48 object-cover"
               />
-              <div className="p-6 flex flex-col flex-grow">
+              <div className="p-6 flex flex-col grow">
                 <h3 className="text-xl font-bold">{item.name}</h3>
-                <p className="mt-2 text-gray-600 flex-grow">
+                <p className="mt-2 text-gray-600 grow">
                   {item.description}
                 </p>
                 <div className="flex justify-between items-center mt-4">

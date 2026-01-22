@@ -16,7 +16,7 @@ export default function CartPage() {
 
   return (
     <div className="py-20 px-4 bg-gray-100 min-h-screen">
-      <div className="container mx-auto">
+      <div className="container mx-auto pt-12">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold">Your Cart</h2>
           <p className="mt-4 text-lg text-gray-600">
